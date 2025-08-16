@@ -2,7 +2,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "jenkins-vpc"
+  name = "EKS-vpc"
   cidr = var.vpc_cidr
 
   azs = data.aws_availability_zones.azs.names
@@ -38,7 +38,7 @@ module "eks" {
   version = "~> 21.0"
 
   name               = "my-cluster"
-  kubernetes_version = "1.33"
+  kubernetes_version = "1.30"
 
   # Optional
   endpoint_public_access = true
@@ -54,7 +54,7 @@ module "eks" {
     example = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = ["t2.small"]
+      instance_types = ["t3.small"]
 
       min_size     = 1
       max_size     = 3
